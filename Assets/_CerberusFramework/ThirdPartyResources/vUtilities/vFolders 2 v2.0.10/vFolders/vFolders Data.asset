@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb9c12a8c6c949f7af83a3d238359d0, type: 3}
+  m_Name: vFolders Data
+  m_EditorClassIdentifier: 
+  folderDatas_byGuid:
+    keys:
+    - f4de5089fb507e540ac20de69715ee48
+    - 585bafaa37537334f92b825cd94355a0
+    - dfd2fd53643ef2c4cad3bb4d799b3091
+    - c3d89b76a58380d42800cab4024d97dd
+    - b625bdf5a858b454e94e8356f93f3e47
+    - 21222d39be0684b69985bdc76725970d
+    - 4939b4dc1fa91c64180c95a3a0b569c5
+    - 2ed795187e1291645841d1f92b9adc96
+    - 25556da666f2566489881c1d8419a1d8
+    - d61740fb37c34434699d521b5aeddaad
+    - 9e966dc30cc953043a985577cd4e57f0
+    - ad26bd12a15b15148821b8633bab6223
+    values:
+    - colorIndex: 0
+      iconNameOrGuid: none
+    - colorIndex: 7
+      iconNameOrGuid: 
+    - colorIndex: 6
+      iconNameOrGuid: 
+    - colorIndex: 6
+      iconNameOrGuid: 
+    - colorIndex: 7
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 9
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 9
+      iconNameOrGuid: 
+    - colorIndex: 6
+      iconNameOrGuid: 
+    - colorIndex: 7
+      iconNameOrGuid: 

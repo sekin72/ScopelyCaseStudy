@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9469e4d7b369b34ea91ea7e95d6ac87, type: 3}
+  m_Name: PoolDataHolder
+  m_EditorClassIdentifier: 
+  _poolDataDict:
+    serializedKvps:
+    - Key: 50
+      Value:
+        Key: 50
+        DefaultCapacity: 1
+        PreWarm: 1
+        AssetReference:
+          m_AssetGUID: 5f88d0cae62f5fc49a391006e8d042ed
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 0
+      isKeyRepeated: 0
+    - Key: 100
+      Value:
+        Key: 100
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 879ea0db2ff6b7647b8658894fc4d1c5
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 1
+      isKeyRepeated: 0
+    - Key: 101
+      Value:
+        Key: 101
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: eba49fe1687b9e3418f99e9889e75a9f
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 2
+      isKeyRepeated: 0
+    - Key: 102
+      Value:
+        Key: 102
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 9630cfa6367029c439cdb5ad360a393c
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 3
+      isKeyRepeated: 0
+    - Key: 103
+      Value:
+        Key: 103
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: d8fb1a19fa104bc438a519d9db3ae11a
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 4
+      isKeyRepeated: 0
+    - Key: 104
+      Value:
+        Key: 104
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 9c86e2da90f871446b089746905efb8a
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 5
+      isKeyRepeated: 0
+    - Key: 105
+      Value:
+        Key: 105
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 4058c0cb81e6c9c46ab6df2a4c616d92
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 6
+      isKeyRepeated: 0
+    - Key: 106
+      Value:
+        Key: 106
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 9df9cc870b53ece4c8757da41ba964cb
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 7
+      isKeyRepeated: 0
+    - Key: 150
+      Value:
+        Key: 150
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 3f72984ebf8414fe59a9c770b720fbfd
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 8
+      isKeyRepeated: 0
+    - Key: 151
+      Value:
+        Key: 151
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: 351203dffa3f8af45a69036838e14228
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 9
+      isKeyRepeated: 0
+    - Key: 152
+      Value:
+        Key: 152
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: d56e6faace369604796f6e1f4e1afd50
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 10
+      isKeyRepeated: 0
+    - Key: 500
+      Value:
+        Key: 500
+        DefaultCapacity: 0
+        PreWarm: 0
+        AssetReference:
+          m_AssetGUID: d5e9efccc960a374ea6a7195c8bf221f
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 11
+      isKeyRepeated: 0
+    dividerPos: 0.33

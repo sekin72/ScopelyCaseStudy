@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_CerberusFramework/Scenes/PreloaderScene.unity
+    guid: 226c5de554953c64e8d9332b4bd83663
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: 00b89eccbd4874e44a52b4c1d6cb924d, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 9fb15478195b34410a403a919eec96e9, type: 2}

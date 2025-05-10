@@ -15,11 +15,21 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 71d765d2c8baa784cba5812a502ec40e
-  m_SerializeEntries: []
+  m_GUID: a60918a568bc0496cbdbf8ae3b24f01f
+  m_SerializeEntries:
+  - m_GUID: d5e9efccc960a374ea6a7195c8bf221f
+    m_Address: ExternalParticlesSystemView
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f88d0cae62f5fc49a391006e8d042ed
+    m_Address: SoundController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 46cfc3e0f5da4c84a82942124a0f0fc2, type: 2}
+  m_Settings: {fileID: 11400000, guid: 1cb2e72f5f870496db915d9fb3ea7de6, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: c3afc204576823943b3d2392fce51336, type: 2}
-    - {fileID: 11400000, guid: 7d7ce4cfb5fd8374abbefda6ad319385, type: 2}
+    - {fileID: 11400000, guid: 0d37718c4b45e43e2aa3cb86ea55aa82, type: 2}
+    - {fileID: 11400000, guid: 2a9c2d6bdae17478195f06a7e66ae3ea, type: 2}
