@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Threading;
 using CerberusFramework.Core.Managers.Pool;
 using CerberusFramework.Core.MVC;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
 {
     public abstract class Enemy : Controller<EnemyData, EnemyView>
     {
+        public event Action<Enemy> EnemyDiedEvent;
+
         public PoolKeys PoolKey => Data.EnemyConfig.PoolKey;
 
         protected override UniTask Initialize(CancellationToken cancellationToken)
@@ -27,6 +27,12 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
 
         protected override void Dispose()
         {
+        }
+
+        public void OnDeath()
+        {
+            View.gameObject.SetActive(false);
+            EnemyDiedEvent?.Invoke(this);
         }
     }
 }

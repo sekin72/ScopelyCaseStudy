@@ -7,8 +7,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem
 {
     public interface IEnemySpawnerSystem : IGameSystem
     {
-        public UniTask<Enemy> SpawnEnemyInRandomSpawnPoint(EnemyConfig enemyConfig, CancellationToken cancellationToken);
-        public UniTask<Enemy> SpawnEnemyInIndexedSpawnPoint(EnemyConfig enemyConfig, int index, CancellationToken cancellationToken);
+        public UniTask<Enemy> SpawnEnemyInRandomSpawnPoint(EnemyConfig enemyConfig);
+        public UniTask<Enemy> SpawnEnemyInIndexedSpawnPoint(EnemyConfig enemyConfig, int index);
         public void DespawnEnemy(Enemy enemy);
     }
 }

@@ -40,20 +40,6 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem
 
         public override void Activate()
         {
-            for(int i = 0; i < 5; i++)
-            {
-                SpawnEnemyInRandomSpawnPoint(new EnemyConfig()
-                {
-                    PoolKey = PoolKeys.SmallCreep,
-                    EnemyType = EnemyTypes.SmallCreep
-                }, CancellationToken.None).ContinueWith(enemy =>enemy.ActivateController()).Forget();
-
-                SpawnEnemyInRandomSpawnPoint(new EnemyConfig()
-                {
-                    PoolKey = PoolKeys.BigCreep,
-                    EnemyType = EnemyTypes.BigCreep
-                }, CancellationToken.None).ContinueWith(enemy => enemy.ActivateController()).Forget();
-            }
         }
 
         public override void Deactivate()
@@ -64,15 +50,15 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem
         {
         }
 
-        public UniTask<Enemy> SpawnEnemyInRandomSpawnPoint(EnemyConfig enemyConfig, CancellationToken cancellationToken)
+        public UniTask<Enemy> SpawnEnemyInRandomSpawnPoint(EnemyConfig enemyConfig)
         {
-            return SpawnEnemyInIndexedSpawnPoint(enemyConfig, Random.Range(0, _spawnPoints.Count), cancellationToken);
+            return SpawnEnemyInIndexedSpawnPoint(enemyConfig, Random.Range(0, _spawnPoints.Count));
         }
 
-        public async UniTask<Enemy> SpawnEnemyInIndexedSpawnPoint(EnemyConfig enemyConfig, int index, CancellationToken cancellationToken)
+        public async UniTask<Enemy> SpawnEnemyInIndexedSpawnPoint(EnemyConfig enemyConfig, int index)
         {
             var enemyView = _viewSpawnerSystem.Spawn<EnemyView>(enemyConfig.PoolKey);
-            var enemy = await EnemyFactory.CreateEnemy(enemyView, enemyConfig, cancellationToken);
+            var enemy = await EnemyFactory.CreateEnemy(enemyView, enemyConfig, CancellationTokenSource.Token);
 
             enemyView.transform.SetParent(_parentTransform);
 

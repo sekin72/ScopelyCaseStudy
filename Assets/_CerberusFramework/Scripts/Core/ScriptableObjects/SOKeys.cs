@@ -7,9 +7,6 @@ namespace CerberusFramework.Core.Managers.Data
         SystemsCollection = 2,
         SoundsList = 3,
         SceneReferencesHolder = 4,
-        LevelData,
-        PlayerSettings,
-        SkillConfigsHolder,
-        LevelDataHolder,
+        LevelDataHolder = 5,
     }
 }

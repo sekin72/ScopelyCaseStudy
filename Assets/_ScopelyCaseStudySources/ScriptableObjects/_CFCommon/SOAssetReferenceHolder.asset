@@ -43,3 +43,9 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
+  - PoolKey: 5
+    AssetReference:
+      m_AssetGUID: 9832a5edd42464d439de92077818bf31
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1

@@ -16,6 +16,7 @@ using CFGameClient.Core.Gameplay;
 using CFGameClient.Core.Gameplay.Systems;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using ScopelyCaseStudy.Core.Gameplay.GameData;
 using ScopelyCaseStudy.Core.Gameplay.UI.Popups.Fail;
 using ScopelyCaseStudy.Core.Gameplay.UI.Popups.Win;
 using ScopelyCaseStudy.Core.Scenes;
@@ -29,28 +30,31 @@ namespace ScopelyCaseStudy.Core.Gameplay
     public class GameSession : IGameSession
     {
         private static readonly ICerberusLogger Logger = CerberusLogger.GetLogger(nameof(GameSession));
-        private readonly IObjectResolver _resolver;
-        private IDisposable _messageSubscription;
-
-        private List<ITickable> _tickables;
-        private List<ILateTickable> _lateTickables;
 
         public CancellationTokenSource CancellationTokenSource { get; private set; }
         public LockBin InputDisabled { get; private set; }
+        public GameSessionSaveStorage GameSessionSaveStorage { get; private set; }
+        public GameSettings GameSettings { get; private set; }
+        public LevelData LevelData { get; private set; }
 
+        private readonly IObjectResolver _resolver;
         private readonly DataManager _dataManager;
         private readonly PopupManager _popupManager;
         private readonly SoundManager _soundManager;
         private readonly VibrationManager _vibrationManager;
         private readonly AssetManager _assetManager;
-
-        private List<IGameSystem> _gameSystems;
-        private Dictionary<Type, IGameSystem> _gameSystemsDictionary;
+        private IDisposable _messageSubscription;
 
         private LevelSceneController _levelSceneController;
 
-        public GameSessionSaveStorage GameSessionSaveStorage { get; private set; }
-        public GameSettings GameSettings { get; private set; }
+        private SystemsCollection _systemsCollection;
+        private List<IGameSystem> _gameSystems;
+        private Dictionary<Type, IGameSystem> _gameSystemsDictionary;
+
+        private List<ITickable> _tickables;
+        private List<ILateTickable> _lateTickables;
+
+        private int _levelIndex;
 
         private bool _deactivated;
         private bool _disposed;
@@ -98,31 +102,11 @@ namespace ScopelyCaseStudy.Core.Gameplay
             _lateTickables = ListPool<ILateTickable>.Get();
 
             GameSessionSaveStorage = _dataManager.Load<GameSessionSaveStorage>();
+            _levelIndex = GameSessionSaveStorage.CurrentLevel;
 
-            var tasks = new List<UniTask>();
+            await LoadDataAssets(cancellationToken);
 
-            GameSettings = _assetManager.GetScriptableAsset<GameSettings>(SOKeys.GameSettings);
-
-            if (GameSettings == null)
-            {
-                tasks.Add(_assetManager.GetScriptableAsset<GameSettings>(SOKeys.GameSettings, cancellationToken)
-                    .ContinueWith(gameSettings => GameSettings = gameSettings));
-            }
-
-            var systemsCollection = _assetManager.GetScriptableAsset<SystemsCollection>(SOKeys.SystemsCollection);
-
-            if (systemsCollection == null)
-            {
-                tasks.Add(_assetManager.GetScriptableAsset<SystemsCollection>(SOKeys.SystemsCollection, cancellationToken)
-                    .ContinueWith(col => systemsCollection = col));
-            }
-
-            if (tasks.Count > 0)
-            {
-                await UniTask.WhenAll(tasks);
-            }
-
-            RegisterSystems(systemsCollection);
+            RegisterSystems(_systemsCollection);
 
             foreach (var system in _gameSystems)
             {
@@ -210,6 +194,44 @@ namespace ScopelyCaseStudy.Core.Gameplay
             }
         }
 
+        private async UniTask LoadDataAssets(CancellationToken cancellationToken)
+        {
+            var tasks = new List<UniTask>();
+
+            GameSettings = _assetManager.GetScriptableAsset<GameSettings>(SOKeys.GameSettings);
+
+            if (GameSettings == null)
+            {
+                tasks.Add(_assetManager.GetScriptableAsset<GameSettings>(SOKeys.GameSettings, cancellationToken)
+                    .ContinueWith(gameSettings => GameSettings = gameSettings));
+            }
+
+            _systemsCollection = _assetManager.GetScriptableAsset<SystemsCollection>(SOKeys.SystemsCollection);
+
+            if (_systemsCollection == null)
+            {
+                tasks.Add(_assetManager.GetScriptableAsset<SystemsCollection>(SOKeys.SystemsCollection, cancellationToken)
+                    .ContinueWith(col => _systemsCollection = col));
+            }
+
+            var levelDataHolder = _assetManager.GetScriptableAsset<LevelDataHolder>(SOKeys.LevelDataHolder);
+
+            if (levelDataHolder == null)
+            {
+                tasks.Add(_assetManager.GetScriptableAsset<LevelDataHolder>(SOKeys.LevelDataHolder, cancellationToken)
+                    .ContinueWith(col => LevelData = col.LevelData[_levelIndex]));
+            }
+            else
+            {
+                LevelData = levelDataHolder.LevelData[_levelIndex];
+            }
+
+            if (tasks.Count > 0)
+            {
+                await UniTask.WhenAll(tasks);
+            }
+        }
+
         public void LevelFinished(bool success)
         {
             if (_deactivated)
@@ -224,6 +246,7 @@ namespace ScopelyCaseStudy.Core.Gameplay
 
             if (!success)
             {
+                _soundManager.PlayOneShot(SoundKeys.LevelFailed);
                 _popupManager.Open<FailPopup, FailPopupData, FailPopupView>(
                     new FailPopupData(
                         _levelSceneController),

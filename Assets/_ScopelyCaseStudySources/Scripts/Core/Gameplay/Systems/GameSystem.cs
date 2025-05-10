@@ -13,11 +13,15 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems
         protected string LockBinKey;
         public abstract Type RegisterType { get; }
 
+        protected CancellationTokenSource CancellationTokenSource;
+
         public virtual UniTask Initialize(GameSession gameSession, CancellationToken cancellationToken)
         {
             Session = gameSession;
 
             LockBinKey = RegisterType.ToString();
+
+            CancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             return UniTask.CompletedTask;
         }
