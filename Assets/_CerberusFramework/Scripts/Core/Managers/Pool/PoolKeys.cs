@@ -19,5 +19,15 @@
         TextTween = 152,
 
         ExternalParticlesSystemView = 500,
+        LevelControllerSystemView = 501,
+
+        RegularTurret = 1000,
+        FreezeTurret = 1001,
+
+        SmallCreep = 2000,
+        BigCreep = 2001,
+
+        Level1 = 3000,
+        Level2 = 3001,
     }
 }

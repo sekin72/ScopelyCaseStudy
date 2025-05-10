@@ -1,6 +1,6 @@
 {
     "name": "ScopelyCaseStudyAsmDef",
-    "rootNamespace": "ScopelyCaseStudyAsmDef",
+    "rootNamespace": "ScopelyCaseStudy",
     "references": [
         "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
