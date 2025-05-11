@@ -67,11 +67,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c4191857fe644004d88a1294213b86ef
-    m_Address: EffectConfigHolder
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1cb2e72f5f870496db915d9fb3ea7de6, type: 2}
   m_SchemaSet:

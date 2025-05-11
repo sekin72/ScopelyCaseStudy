@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4fc4776664af3845b185c45b659b1f9, type: 3}
-  m_Name: SmallCreepWeaponConfig
+  m_Name: SmallCreepWeaponConfig 2
   m_EditorClassIdentifier: 
-  AttackSpeed: 1
-  Damage: 5
+  Cooldown: 2
+  Damage: 10
   Range: 1
+  AdditionalEffects: 

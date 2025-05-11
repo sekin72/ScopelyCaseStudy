@@ -15,6 +15,7 @@ namespace CerberusFramework.Utilities
         public JsonSerializer(JsonSerializerSettings settings)
         {
             _settings = settings;
+            _settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
 
         public T DeserializeObject<T>(byte[] serializedObj)

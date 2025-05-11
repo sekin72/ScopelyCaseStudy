@@ -54,12 +54,12 @@ MonoBehaviour:
     Bottom: 0
     Left: 0
   MaximumPadding:
-    Top: 50
+    Top: 0
     Right: 0
     Bottom: 0
     Left: 0
-  ScreenX: 828
-  ScreenY: 1792
+  ScreenX: 1920
+  ScreenY: 1080
   RectTransform: {fileID: 291905786539023111}
 --- !u!1 &291905787226243713
 GameObject:

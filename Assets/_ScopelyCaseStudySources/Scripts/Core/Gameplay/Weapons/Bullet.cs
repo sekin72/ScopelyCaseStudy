@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using ScopelyCaseStudy.Core.Gameplay.Characters;
+using ScopelyCaseStudy.Core.Gameplay.Effects;
 using ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem;
 using UnityEngine;
 using VContainer.Unity;
@@ -20,13 +22,20 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
         private float _speed;
         private Vector3 _direction;
 
+        private List<Effect> _additionalEffects;
+
         private float _currentLifetime;
 
         private Action<Bullet> _onDispose;
 
         private GameSession _gameSession;
 
-        public void Initialize(GameSession session, CharacterView firingCharacter, Vector3 direction, BulletData bulletData, Action<Bullet> onDispose)
+        public void Initialize(
+            GameSession session,
+            CharacterView firingCharacter,
+            Vector3 direction,
+            BulletData bulletData,
+            Action<Bullet> onDispose)
         {
             _gameSession = session;
 
@@ -45,6 +54,15 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
 
             transform.LookAt(transform.position + direction);
             _particle.Clear();
+
+            _additionalEffects = bulletData.AdditionalEffects;
+
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(bulletData.Color, 0.0f), new GradientColorKey(bulletData.Color, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(bulletData.Color.a, 0.0f), new GradientAlphaKey(bulletData.Color.a, 1.0f) }
+            );
+            _particle.colorGradient = gradient;
         }
 
         public void Dispose()
@@ -67,19 +85,29 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out CharacterView characterView) && characterView != _firingCharacter)
+            if (other.transform.TryGetComponent(out EnemyView enemyView) && enemyView != _firingCharacter)
             {
-                _gameSession.Base.TakeDamage(_damage);
-                Dispose();
-                return;
+                Damage(_enemyControllerSystem.GetEnemyFromView(enemyView));
             }
 
-            if (other.transform.parent != null && other.transform.parent.TryGetComponent(out characterView) && characterView != _firingCharacter)
+            if (other.TryGetComponent(out CharacterView characterView) && characterView == _gameSession.Base.View)
             {
-                var enemy = _enemyControllerSystem.GetEnemyFromView(characterView as EnemyView);
-                enemy.TakeDamage(_damage);
-                Dispose();
+                Damage(_gameSession.Base);
             }
+        }
+
+        private void Damage(ICharacter character)
+        {
+            character.TakeDamage(_damage);
+            if (_additionalEffects != null)
+            {
+                foreach (var effect in _additionalEffects)
+                {
+                    character.GetModified(effect);
+                }
+            }
+
+            Dispose();
         }
     }
 }

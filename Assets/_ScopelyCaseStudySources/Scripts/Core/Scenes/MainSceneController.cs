@@ -66,10 +66,13 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         private void OnNewGameButtonClick()
         {
+            var currentLevel = _dataManager.Load<GameSessionSaveStorage>();
+
             _dataManager.Save(new GameSessionSaveStorage
             {
                 GameplayFinished = false,
-                LevelRandomSeed = Mathf.Abs((int)DateTime.Now.Ticks)
+                LevelRandomSeed = Mathf.Abs((int)DateTime.Now.Ticks),
+                CurrentLevel = currentLevel.CurrentLevel,
             });
 
             _loadingManager.LoadLevelScene().Forget();

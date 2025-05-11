@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Turret
+  - TurretReach
+  - Base
+  - Ground
+  - Bullet
   - 
   - 
   - 

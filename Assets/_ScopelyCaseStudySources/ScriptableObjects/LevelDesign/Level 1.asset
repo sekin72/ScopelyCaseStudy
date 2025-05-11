@@ -20,4 +20,11 @@ MonoBehaviour:
       Count: 10
     SpawnDelay: 0
     SpawnInterval: 3
+  - EnemyLists:
+    - EnemyConfigs: {fileID: 11400000, guid: e9b4e1757feb7a141b470087fc89e026, type: 2}
+      Count: 10
+    - EnemyConfigs: {fileID: 11400000, guid: f22717418bf2a3e4caad25d88e99ff13, type: 2}
+      Count: 10
+    SpawnDelay: 0
+    SpawnInterval: 2
   BaseConfig: {fileID: 11400000, guid: 4442dcc71ff7d074380c377e72f0712f, type: 2}

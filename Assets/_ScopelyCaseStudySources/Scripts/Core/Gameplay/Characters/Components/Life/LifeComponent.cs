@@ -59,18 +59,17 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
             Died?.Invoke();
         }
 
-        public override void GetModified(Effect effect)
-        {
-            switch (effect.EffectType)
-            {
-                default:
-                    break;
-            }
-        }
-
         public void LateTick()
         {
             _healthBar.transform.LookAt(GameSession.LevelCamera.transform.position);
+        }
+
+        public override void GetModified(Effect effect)
+        {
+        }
+
+        public override void ReverseEffect(Effect effect)
+        {
         }
     }
 }

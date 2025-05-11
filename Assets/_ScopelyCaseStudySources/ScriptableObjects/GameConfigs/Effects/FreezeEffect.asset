@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FreezeEffect
   m_EditorClassIdentifier: 
   Value: 30
-  _affectedCharacter: 1
+  Time: 3

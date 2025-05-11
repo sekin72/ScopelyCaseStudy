@@ -9,5 +9,6 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
 
         public float BulletLifetime;
         public float BulletTravelSpeed;
+        public Color BulletColor;
     }
 }

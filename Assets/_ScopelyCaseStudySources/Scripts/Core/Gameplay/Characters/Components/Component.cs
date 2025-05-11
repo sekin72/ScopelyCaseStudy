@@ -1,6 +1,5 @@
 using ScopelyCaseStudy.Core.Gameplay.Effects;
 using UnityEngine;
-using VContainer;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 {
@@ -23,5 +22,6 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
         }
 
         public abstract void GetModified(Effect effect);
+        public abstract void ReverseEffect(Effect effect);
     }
 }

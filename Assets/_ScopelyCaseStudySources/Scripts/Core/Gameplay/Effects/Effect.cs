@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Effects
@@ -5,20 +7,20 @@ namespace ScopelyCaseStudy.Core.Gameplay.Effects
     public abstract class Effect : ScriptableObject
     {
         public abstract EffectType EffectType { get; }
-
         public abstract AffectedCharacterType AffectedCharacter { get; }
         public abstract AffectedComponentType AffectedComponent { get; }
 
         public float Value;
+        public float Time;
 
-        public abstract string GetTitle();
-        public abstract string GetDescription();
+        public abstract UniTask ApplyEffect(CancellationToken cancellationToken);
     }
 
     public enum AffectedCharacterType
     {
-        Player,
-        Enemy
+        Base,
+        Enemy,
+        Turret,
     }
 
     public enum AffectedComponentType

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2318424153067955782}
   - component: {fileID: 5074732985308050508}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 0.20109558
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7622773982154023839}
   - component: {fileID: 5641509545429359419}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6324481265264614395}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

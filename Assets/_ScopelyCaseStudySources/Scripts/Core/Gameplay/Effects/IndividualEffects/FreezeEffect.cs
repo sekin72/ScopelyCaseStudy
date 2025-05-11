@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Effects
@@ -6,20 +9,12 @@ namespace ScopelyCaseStudy.Core.Gameplay.Effects
     public class FreezeEffect : Effect
     {
         public override EffectType EffectType => EffectType.Freeze;
-
-        public override AffectedCharacterType AffectedCharacter => _affectedCharacter;
-        [SerializeField] private AffectedCharacterType _affectedCharacter = AffectedCharacterType.Enemy;
-
+        public override AffectedCharacterType AffectedCharacter => AffectedCharacterType.Enemy;
         public override AffectedComponentType AffectedComponent => AffectedComponentType.MovementComponent;
 
-        public override string GetTitle()
+        public override async UniTask ApplyEffect(CancellationToken cancellationToken)
         {
-            return $"FREEZE";
-        }
-
-        public override string GetDescription()
-        {
-            return $"Movement speed decreased to -{Value}%";
+            await UniTask.Delay(TimeSpan.FromSeconds(Time), cancellationToken: cancellationToken);
         }
     }
 }

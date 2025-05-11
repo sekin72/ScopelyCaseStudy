@@ -8,6 +8,5 @@ namespace CerberusFramework.Core.Managers.Data
         SoundsList = 3,
         SceneReferencesHolder = 4,
         LevelDataHolder = 5,
-        EffectConfigsHolder = 6,
     }
 }

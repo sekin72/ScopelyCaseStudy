@@ -1,4 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using MessagePipe;
+using ScopelyCaseStudy.Core.Gameplay.Events;
 using ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem;
 using UnityEngine;
 
@@ -9,6 +13,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
         [SerializeField] private TurretColliderProxy _colliderProxy;
         private IEnemyControllerSystem _enemyControllerSystem;
         private List<ICharacter> _targetsInRange;
+
+        private IDisposable _messageSubscription;
 
         public override void Initialize(GameSession gameSession, ICharacter character, CharacterConfig characterConfig)
         {
@@ -22,11 +28,17 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
             _colliderProxy.OnEnemyExited += OnEnemyExited;
             _colliderProxy.SetColliderRadius(AttackRange);
 
-            Attack();
+            var bagBuilder = DisposableBag.CreateBuilder();
+            GlobalMessagePipe.GetSubscriber<EnemyKilledEvent>().Subscribe(OnEnemyDied).AddTo(bagBuilder);
+            _messageSubscription = bagBuilder.Build();
+
+            Attack().Forget();
         }
 
         public override void Dispose()
         {
+            _messageSubscription?.Dispose();
+
             _colliderProxy.OnEnemyCollided -= OnEnemyCollided;
             _colliderProxy.OnEnemyExited -= OnEnemyExited;
 
@@ -37,13 +49,11 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
         {
             var enemy = _enemyControllerSystem.GetEnemyFromView(enemyView);
             _targetsInRange.Add(enemy);
-            enemy.EnemyDiedEvent += OnEnemyDied;
         }
 
         private void OnEnemyExited(EnemyView enemyView)
         {
             var enemy = _enemyControllerSystem.GetEnemyFromView(enemyView);
-            enemy.EnemyDiedEvent -= OnEnemyDied;
 
             if (_targetsInRange.Contains(enemy))
             {
@@ -56,12 +66,15 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
             }
         }
 
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(EnemyKilledEvent evt)
         {
-            if (_targetsInRange.Contains(enemy))
+            var enemy = evt.Enemy;
+            if (!_targetsInRange.Contains(enemy))
             {
-                _targetsInRange.Remove(enemy);
+                return;
             }
+
+            _targetsInRange.Remove(enemy);
 
             if (AttackTarget == enemy)
             {

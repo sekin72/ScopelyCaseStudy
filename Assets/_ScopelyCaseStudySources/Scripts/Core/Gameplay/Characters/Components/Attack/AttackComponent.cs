@@ -1,11 +1,10 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using ScopelyCaseStudy.Core.Gameplay.Characters.Turrets;
 using ScopelyCaseStudy.Core.Gameplay.Effects;
 using ScopelyCaseStudy.Core.Gameplay.Weapons;
 using UnityEngine;
-using VContainer;
 using VContainer.Unity;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
@@ -41,11 +40,10 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 
             Weapon.Initialize(this, characterConfig.WeaponConfig);
 
-            _attackCooldown = 1f / characterConfig.WeaponConfig.AttackSpeed;
+            _attackCooldown = 1f / characterConfig.WeaponConfig.Cooldown;
             AttackRange = characterConfig.WeaponConfig.Range;
 
-            AttackTarget = GameSession.Base as ICharacter;
-            AttackTarget = character == GameSession.Base ? null : GameSession.Base;
+            AttackTarget = character is Turret ? null : GameSession.Base;
 
             _initialized = true;
         }
@@ -115,11 +113,10 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 
         public override void GetModified(Effect effect)
         {
-            switch (effect.EffectType)
-            {
-                default:
-                    break;
-            }
+        }
+
+        public override void ReverseEffect(Effect effect)
+        {
         }
     }
 }

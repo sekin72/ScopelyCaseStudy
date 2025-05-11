@@ -1,3 +1,5 @@
+using ScopelyCaseStudy.Core.Gameplay.Effects;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Weapons
@@ -6,8 +8,10 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
     {
         public abstract AttackComponentTypes GetAttackComponentType();
 
-        public int AttackSpeed;
+        public int Cooldown;
         public int Damage;
         public int Range;
+
+        public List<Effect> AdditionalEffects;
     }
 }

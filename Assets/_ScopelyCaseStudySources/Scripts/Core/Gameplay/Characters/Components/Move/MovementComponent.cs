@@ -24,5 +24,15 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
                     break;
             }
         }
+
+        public override void ReverseEffect(Effect effect)
+        {
+            switch (effect.EffectType)
+            {
+                case EffectType.Freeze:
+                    MoveSpeed = CharacterConfig.MoveSpeed;
+                    break;
+            }
+        }
     }
 }

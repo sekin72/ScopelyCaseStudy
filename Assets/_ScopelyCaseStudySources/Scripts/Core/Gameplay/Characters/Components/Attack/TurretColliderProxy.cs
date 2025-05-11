@@ -12,7 +12,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent.TryGetComponent(out EnemyView enemy))
+            if (other.transform.TryGetComponent(out EnemyView enemy))
             {
                 OnEnemyCollided?.Invoke(enemy);
             }
@@ -20,7 +20,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.transform.parent.TryGetComponent(out EnemyView enemy))
+            if (other.transform.TryGetComponent(out EnemyView enemy))
             {
                 OnEnemyExited?.Invoke(enemy);
             }

@@ -706,7 +706,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 750, y: 1300}
+  m_SizeDelta: {x: 750, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4804960914060328502
 CanvasRenderer:
@@ -1047,7 +1047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6555059693812048960, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 42.65
       objectReference: {fileID: 0}
     - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
       propertyPath: m_text
@@ -1055,7 +1055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 42.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
@@ -1315,9 +1315,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Load Game
       objectReference: {fileID: 0}
+    - target: {fileID: 6555059693812048960, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
+      propertyPath: m_fontSize
+      value: 42.65
+      objectReference: {fileID: 0}
     - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
       propertyPath: m_text
       value: Load Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
+      propertyPath: m_fontSize
+      value: 42.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
@@ -1734,9 +1742,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 6555059693812048960, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
+      propertyPath: m_fontSize
+      value: 42.65
+      objectReference: {fileID: 0}
     - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
       propertyPath: m_text
       value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278626189469198720, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}
+      propertyPath: m_fontSize
+      value: 42.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b6e8fcc083524d41989a6baa5dddbc0, type: 3}

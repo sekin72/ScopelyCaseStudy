@@ -1,5 +1,4 @@
 using System;
-using CerberusFramework.Core.Managers.Pool;
 using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Characters

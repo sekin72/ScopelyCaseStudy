@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using ScopelyCaseStudy.Core.Gameplay.Effects;
 using UnityEngine;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Characters.Turrets
@@ -8,6 +5,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Turrets
     [CreateAssetMenu(fileName = "TurretConfig", menuName = "ScopelyCaseStudy/Data/TurretConfig", order = 3)]
     public class TurretConfig : CharacterConfig
     {
-        public List<EffectType> AdditionalEffects;
+        public int Cost = 1;
+        public float CostMultiplier = 1.2f;
     }
 }

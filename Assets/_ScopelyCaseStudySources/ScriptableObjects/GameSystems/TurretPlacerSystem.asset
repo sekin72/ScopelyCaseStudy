@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab8765d107952254189654df1289964e, type: 3}
-  m_Name: RangedWeaponConfig
+  m_Script: {fileID: 11500000, guid: 6ea4b5ba4d13c3444af1dbef718fa3d9, type: 3}
+  m_Name: TurretPlacerSystem
   m_EditorClassIdentifier: 
-  AttackSpeed: 1
-  Damage: 1
-  Range: 25
-  BulletLifetime: 2
-  BulletTravelSpeed: 5
+  <TurretConfigs>k__BackingField:
+  - {fileID: 11400000, guid: 6c91b7d83cdc15e4a92dcc2e664a3433, type: 2}
+  - {fileID: 11400000, guid: e5272b496c47d7a44a742d64da162afb, type: 2}

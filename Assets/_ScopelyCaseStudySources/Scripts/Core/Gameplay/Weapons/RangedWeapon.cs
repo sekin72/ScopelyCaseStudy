@@ -35,7 +35,13 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
             _firedBullets = new List<BulletGameobjectPair>();
 
             var rangedWeaponConfig = weaponConfig as RangedWeaponConfig;
-            _originalBulletData = new BulletData(weaponConfig.Damage, weaponConfig.Range, rangedWeaponConfig.BulletLifetime, rangedWeaponConfig.BulletTravelSpeed);
+            _originalBulletData = new BulletData(
+                weaponConfig.Damage,
+                weaponConfig.Range,
+                rangedWeaponConfig.BulletLifetime,
+                rangedWeaponConfig.BulletTravelSpeed,
+                rangedWeaponConfig.AdditionalEffects,
+                rangedWeaponConfig.BulletColor);
             _bulletData = _originalBulletData;
         }
 
@@ -68,7 +74,12 @@ namespace ScopelyCaseStudy.Core.Gameplay.Weapons
             bullet.transform.position = transform.position;
 
             bullet.BulletDisposed += DisposeBullet;
-            bullet.Initialize(_gameSession, AttackComponent.AttachedCharacter.View as CharacterView, target.View.transform.position - transform.position, _bulletData, DisposeBullet);
+            bullet.Initialize(
+                _gameSession,
+                AttackComponent.AttachedCharacter.View as CharacterView,
+                target.View.transform.position - transform.position,
+                _bulletData,
+                DisposeBullet);
 
             _firedBullets.Add(new BulletGameobjectPair
             {

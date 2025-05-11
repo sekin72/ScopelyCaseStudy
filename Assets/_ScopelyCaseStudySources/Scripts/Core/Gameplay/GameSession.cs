@@ -37,8 +37,9 @@ namespace ScopelyCaseStudy.Core.Gameplay
         public LockBin InputDisabled { get; private set; }
         public GameSessionSaveStorage GameSessionSaveStorage { get; private set; }
         public GameSettings GameSettings { get; private set; }
+        public LevelDataHolder LevelDataHolder { get; private set; }
         public LevelData LevelData { get; private set; }
-        public Base Base{ get; private set; }
+        public Base Base { get; private set; }
         public Camera LevelCamera => _levelSceneController.SceneCamera;
 
         private readonly IObjectResolver _resolver;
@@ -105,10 +106,11 @@ namespace ScopelyCaseStudy.Core.Gameplay
             _tickables = ListPool<ITickable>.Get();
             _lateTickables = ListPool<ILateTickable>.Get();
 
-            GameSessionSaveStorage = _dataManager.Load<GameSessionSaveStorage>();
-            _levelIndex = GameSessionSaveStorage.CurrentLevel;
-
             await LoadDataAssets(cancellationToken);
+
+            GameSessionSaveStorage = _dataManager.Load<GameSessionSaveStorage>();
+            _levelIndex = GameSessionSaveStorage.CurrentLevel % LevelDataHolder.LevelData.Count;
+            LevelData = LevelDataHolder.LevelData[_levelIndex];
 
             RegisterSystems(_systemsCollection);
 
@@ -133,6 +135,8 @@ namespace ScopelyCaseStudy.Core.Gameplay
             }
 
             RegisterTicks();
+
+            _levelSceneController.RTSCamera.Initialize();
         }
 
         private void Deactivate()
@@ -143,6 +147,8 @@ namespace ScopelyCaseStudy.Core.Gameplay
             }
 
             _deactivated = true;
+
+            _levelSceneController.RTSCamera.Dispose();
 
             if (_tickables.Count > 0)
             {
@@ -225,16 +231,12 @@ namespace ScopelyCaseStudy.Core.Gameplay
                     .ContinueWith(col => _systemsCollection = col));
             }
 
-            var levelDataHolder = _assetManager.GetScriptableAsset<LevelDataHolder>(SOKeys.LevelDataHolder);
+            LevelDataHolder = _assetManager.GetScriptableAsset<LevelDataHolder>(SOKeys.LevelDataHolder);
 
-            if (levelDataHolder == null)
+            if (LevelDataHolder == null)
             {
                 tasks.Add(_assetManager.GetScriptableAsset<LevelDataHolder>(SOKeys.LevelDataHolder, cancellationToken)
-                    .ContinueWith(col => LevelData = col.LevelData[_levelIndex]));
-            }
-            else
-            {
-                LevelData = levelDataHolder.LevelData[_levelIndex];
+                    .ContinueWith(col => LevelDataHolder = col));
             }
 
             if (tasks.Count > 0)
@@ -265,6 +267,9 @@ namespace ScopelyCaseStudy.Core.Gameplay
                     CancellationTokenSource.Token).Forget();
                 return;
             }
+
+            GameSessionSaveStorage.CurrentLevel++;
+            SaveGameSessionStorage();
 
             _soundManager.PlayOneShot(SoundKeys.LevelCompleted);
             _vibrationManager.Vibrate(VibrationType.Success);

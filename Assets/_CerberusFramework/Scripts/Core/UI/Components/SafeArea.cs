@@ -1,7 +1,9 @@
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace CerberusFramework.Core.UI.Components
 {
@@ -69,7 +71,9 @@ namespace CerberusFramework.Core.UI.Components
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
 
+#if UNITY_EDITOR
             EditorUtility.SetDirty(this);
+#endif
         }
     }
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
   WeaponConfig: {fileID: 11400000, guid: 60647ea4323a87245817fe6e4359ac6a, type: 2}
   MoveSpeed: 0.5
   EnemyType: 1
-  RewardedCoin: 10
+  RewardedCoin: 3

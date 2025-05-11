@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolKey: 1001
   Health: 0
-  WeaponConfig: {fileID: 11400000, guid: a05944d5d471093448958f36b64b591c, type: 2}
-  MoveSpeed: 1
-  AdditionalEffects: 00000000
+  WeaponConfig: {fileID: 11400000, guid: f9ef5d87c5fcba843ac97a535b39812f, type: 2}
+  MoveSpeed: 0
+  Cost: 3
+  CostMultiplier: 2

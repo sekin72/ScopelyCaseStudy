@@ -1,5 +1,3 @@
-using CerberusFramework.Core.MVC;
-
 namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
     public class EnemyData : CharacterData

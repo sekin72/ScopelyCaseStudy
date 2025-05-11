@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using CerberusFramework.Utilities.Extensions;
 using Cysharp.Threading.Tasks;
+using MessagePipe;
 using ScopelyCaseStudy.Core.Gameplay.Characters;
+using ScopelyCaseStudy.Core.Gameplay.Events;
 using ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem;
 using UnityEngine;
 using VContainer.Unity;
@@ -24,6 +26,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
         private int _currentWave;
         private int _maxWave;
 
+        private IDisposable _messageSubscription;
+
         public override async UniTask Initialize(GameSession gameSession, CancellationToken cancellationToken)
         {
             await base.Initialize(gameSession, cancellationToken);
@@ -32,10 +36,14 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 
             _enemies = new List<Enemy>();
             _enemyViewToEnemyMap = new Dictionary<EnemyView, Enemy>();
-            _currentWave = 0;
+            _currentWave = Session.GameSessionSaveStorage.WaveIndex;
             _maxWave = Session.LevelData.WaveData.Count;
 
             _currentWaveEnemyCount = 0;
+
+            var bagBuilder = DisposableBag.CreateBuilder();
+            GlobalMessagePipe.GetSubscriber<EnemyKilledEvent>().Subscribe(OnEnemyDied).AddTo(bagBuilder);
+            _messageSubscription = bagBuilder.Build();
         }
 
         public override void Activate()
@@ -45,6 +53,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 
         public override void Deactivate()
         {
+            _messageSubscription?.Dispose();
         }
 
         public override void Dispose()
@@ -59,20 +68,23 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 
         private void OnWaveFinished()
         {
-            if (_currentWave >= _maxWave)
+            if (++_currentWave >= _maxWave)
             {
                 Session.LevelFinished(true);
             }
             else
             {
-                LoadEnemies();
+                LoadEnemies().Forget();
             }
         }
 
         private async UniTask LoadEnemies()
         {
-            var waveData = Session.LevelData.WaveData[_currentWave++];
+            var waveData = Session.LevelData.WaveData[_currentWave];
             var enemyLists = waveData.EnemyLists;
+
+            Session.GameSessionSaveStorage.WaveIndex = _currentWave;
+            Session.SaveGameSessionStorage();
 
             var spawnList = new List<EnemyConfig>();
 
@@ -97,7 +109,6 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
                 tasks.Add(_enemySpawnerSystem.SpawnEnemyInRandomSpawnPoint(enemyConfigCountPair).ContinueWith(retrievedEnemy =>
                 {
                     enemy = retrievedEnemy;
-                    enemy.EnemyDiedEvent += OnEnemyDied;
 
                     _enemies.Add(enemy);
                     _enemyViewToEnemyMap.Add(enemy.View, enemy);
@@ -110,9 +121,13 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
             await UniTask.WhenAll(tasks);
         }
 
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(EnemyKilledEvent evt)
         {
-            enemy.EnemyDiedEvent -= OnEnemyDied;
+            var enemy = evt.Enemy;
+            if (!_enemies.Contains(enemy))
+            {
+                return;
+            }
 
             _enemies.Remove(enemy);
             _enemyViewToEnemyMap.Remove(enemy.View);
@@ -137,7 +152,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 
         public void LateTick()
         {
-            foreach(var enemy in _enemies)
+            foreach (var enemy in _enemies)
             {
                 if (enemy.IsAlive())
                 {

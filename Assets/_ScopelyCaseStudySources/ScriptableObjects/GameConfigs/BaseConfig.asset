@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolKey: 900
   Health: 100
-  WeaponConfig: {fileID: 11400000, guid: ba37066a24facbb4c974f24e5d143b04, type: 2}
+  WeaponConfig: {fileID: 0}
   MoveSpeed: 0

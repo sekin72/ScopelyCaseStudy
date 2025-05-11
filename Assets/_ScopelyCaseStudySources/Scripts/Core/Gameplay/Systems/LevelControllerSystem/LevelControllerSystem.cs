@@ -27,7 +27,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.LevelControllerSystem
             _view = _viewSpawnerSystem.Spawn<LevelControllerSystemView>(PoolKeys.LevelControllerSystemView);
             await _view.Initialize(cancellationToken);
 
-            Level = _viewSpawnerSystem.Spawn<LevelView>((PoolKeys)(LevelPoolIndexStart+ Session.GameSessionSaveStorage.CurrentLevel));
+            Level = _viewSpawnerSystem.Spawn<LevelView>((PoolKeys)(LevelPoolIndexStart + Session.GameSessionSaveStorage.CurrentLevel));
             _view.AttachLevel(Level);
             await Level.Initialize(cancellationToken);
         }

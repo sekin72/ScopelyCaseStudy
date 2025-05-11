@@ -82,6 +82,13 @@ namespace ScopelyCaseStudy.Core.Injection
             builder.RegisterMessageBroker<AttachParticleEvent>(options);
             builder.RegisterMessageBroker<DetachParticleEvent>(options);
             builder.RegisterMessageBroker<InputTakenEvent>(options);
+            builder.RegisterMessageBroker<EnemyKilledEvent>(options);
+            builder.RegisterMessageBroker<FirstInputTakenEvent>(options);
+            builder.RegisterMessageBroker<GoldChangedEvent>(options);
+            builder.RegisterMessageBroker<ScoreChangedEvent>(options);
+            builder.RegisterMessageBroker<TurretCostChangedEvent>(options);
+            builder.RegisterMessageBroker<TurretPlacedEvent>(options);
+            builder.RegisterMessageBroker<TurretSoldEvent>(options);
             return options;
         }
 

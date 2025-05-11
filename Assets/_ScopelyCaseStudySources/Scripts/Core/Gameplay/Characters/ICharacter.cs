@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using CerberusFramework.Core.MVC;
 using ScopelyCaseStudy.Core.Gameplay.Effects;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 
 namespace ScopelyCaseStudy
 {

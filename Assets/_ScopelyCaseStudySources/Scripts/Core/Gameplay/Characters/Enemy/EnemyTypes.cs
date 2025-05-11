@@ -1,6 +1,6 @@
 namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
-    public enum EnemyTypes 
+    public enum EnemyTypes
     {
         SmallCreep,
         BigCreep,

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using CerberusFramework.Core.Managers.Pool;
 using ScopelyCaseStudy.Core.Gameplay.Weapons;
 using UnityEngine;

@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+
 namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 {
     public class CreepAttackComponent : AttackComponent
@@ -6,7 +8,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
         {
             base.Initialize(gameSession, character, characterConfig);
 
-            Attack();
+            Attack().Forget();
         }
     }
 }

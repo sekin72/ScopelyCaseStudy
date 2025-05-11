@@ -9,7 +9,9 @@ using CerberusFramework.Core.UI.Popups;
 using CerberusFramework.Core.UI.Popups.Loading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using RTS_Cam;
 using ScopelyCaseStudy.Core.Gameplay;
+using ScopelyCaseStudy.Core.Gameplay.UI;
 using ScopelyCaseStudy.Core.Gameplay.UI.Popups.Pause;
 using UnityEngine;
 using VContainer;
@@ -34,6 +36,10 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         [SerializeField] private GameObject _light;
         [SerializeField] private CFButton _pauseButton;
+
+        [SerializeField] private LevelScenePanel _levelScenePanel;
+
+        public RTS_Camera RTSCamera;
 
         [Inject]
         public void Inject(
@@ -61,6 +67,8 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         public override UniTask Deactivate(CancellationToken cancellationToken)
         {
+            _levelScenePanel.Dispose();
+
             _session?.Dispose();
             _session = null;
 
@@ -116,6 +124,8 @@ namespace ScopelyCaseStudy.Core.Scenes
 
             await _session.Initialize(this);
 
+            _levelScenePanel.Initialize(_session, SceneCamera);
+
             _pauseButton.onClick.AddListener(() => OpenPausePopup(linkedCancellationToken));
 
             var popup = _popupManager.GetPopup<LoadingPopup>();
@@ -133,6 +143,7 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         public void ReturnToMainScene()
         {
+            _levelScenePanel.Dispose();
             _session.Dispose();
             _session = null;
 
@@ -141,6 +152,7 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         public void RestartLevel()
         {
+            _levelScenePanel.Dispose();
             LoadLevel().Forget();
         }
 
