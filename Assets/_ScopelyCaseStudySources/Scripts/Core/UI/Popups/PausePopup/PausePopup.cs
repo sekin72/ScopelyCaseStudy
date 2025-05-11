@@ -82,8 +82,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI.Popups.Pause
 
         private void OnSaveClicked()
         {
-            Data.OnSaveButtonClicked?.Invoke();
             ClosePopup();
+            Data.OnSaveButtonClicked?.Invoke();
         }
 
         private void OnLoadClicked()

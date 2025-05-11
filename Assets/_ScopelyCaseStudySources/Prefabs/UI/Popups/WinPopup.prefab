@@ -138,6 +138,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: NextLevelButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911114366142079623, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1300
+      objectReference: {fileID: 0}
     - target: {fileID: 8581574684041390851, guid: ea603a214b96f8b47ad3a39bfa3295d6, type: 3}
       propertyPath: m_Transition
       value: 2

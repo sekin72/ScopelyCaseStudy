@@ -5,9 +5,10 @@ using Cysharp.Threading.Tasks;
 
 namespace CFGameClient.Core.Gameplay
 {
-    public interface IGameSession : IDisposable
+    public interface IGameSession
     {
         public UniTask Initialize(SceneController levelSceneController);
+        public void Dispose();
 
         public T GetSystem<T>() where T : IGameSystem;
     }

@@ -5,7 +5,7 @@ using ScopelyCaseStudy.Core.Gameplay;
 
 namespace CFGameClient.Core.Gameplay.Systems
 {
-    public interface IGameSystem : IDisposable
+    public interface IGameSystem
     {
         Type RegisterType { get; }
 
@@ -14,5 +14,6 @@ namespace CFGameClient.Core.Gameplay.Systems
         void Activate();
 
         void Deactivate();
+        void Dispose();
     }
 }

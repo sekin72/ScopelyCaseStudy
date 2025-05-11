@@ -242,4 +242,16 @@ MonoBehaviour:
           m_EditorAssetChanged: 1
       index: 18
       isKeyRepeated: 0
+    - Key: 1500
+      Value:
+        Key: 1500
+        DefaultCapacity: 20
+        PreWarm: 1
+        AssetReference:
+          m_AssetGUID: 92845a57daaf5314cb6f93279d3cf064
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_EditorAssetChanged: 1
+      index: 19
+      isKeyRepeated: 0
     dividerPos: 0.33

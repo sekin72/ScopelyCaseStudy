@@ -24,6 +24,8 @@
         RegularTurret = 1000,
         FreezeTurret = 1001,
 
+        Bullet = 1500,
+
         SmallCreep = 2000,
         BigCreep = 2001,
 

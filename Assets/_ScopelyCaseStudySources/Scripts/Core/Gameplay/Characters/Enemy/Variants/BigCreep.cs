@@ -1,6 +1,6 @@
-namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
+namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
-    public class BigCreep : Enemy
+    public class BigCreep : CreepBase
     {
     }
 }

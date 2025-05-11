@@ -1,12 +1,11 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
 
-namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
+namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
     public static class EnemyFactory
     {
-        public static async UniTask<Enemy> CreateEnemy(EnemyView enemyView, EnemyConfig enemyConfig, CancellationToken cancellationToken)
+        public static async UniTask<Enemy> CreateEnemy(GameSession gameSession, EnemyView enemyView, EnemyConfig enemyConfig, CancellationToken cancellationToken)
         {
             Enemy enemy = null;
             EnemyData enemyData = new EnemyData(enemyConfig);
@@ -23,6 +22,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
                     break;
             }
 
+            enemy.SetSession(gameSession);
             await enemy.InitializeController(enemyData, enemyView, cancellationToken);
 
             return enemy;

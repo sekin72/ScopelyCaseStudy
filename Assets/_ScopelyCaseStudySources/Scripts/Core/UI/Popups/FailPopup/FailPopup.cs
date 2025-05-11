@@ -11,11 +11,13 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI.Popups.Fail
             await base.Initialize(cancellationToken);
 
             View.RestartButtonClicked += OnRestartClicked;
+            View.CloseButtonClicked += OnBackToMainClicked;
         }
 
         protected override void Dispose()
         {
             View.RestartButtonClicked -= OnRestartClicked;
+            View.CloseButtonClicked -= OnBackToMainClicked;
 
             base.Dispose();
         }
@@ -23,6 +25,11 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI.Popups.Fail
         private void OnRestartClicked()
         {
             Data.LevelSceneController.RestartLevel();
+        }
+
+        private void OnBackToMainClicked()
+        {
+            Data.LevelSceneController.ReturnToMainScene();
         }
     }
 }

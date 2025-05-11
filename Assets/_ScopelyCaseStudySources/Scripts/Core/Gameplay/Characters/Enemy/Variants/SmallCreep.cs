@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using CerberusFramework.Core.MVC;
-using UnityEngine;
-
-namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
+namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
-    public class SmallCreep : Enemy
+    public class SmallCreep : CreepBase
     {
     }
 }

@@ -1,7 +1,6 @@
-﻿using System.Threading;
-using CFGameClient.Core.Gameplay.Systems;
+﻿using CFGameClient.Core.Gameplay.Systems;
 using Cysharp.Threading.Tasks;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem
 {

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using CerberusFramework.Core.Managers.Pool;
 using CFGameClient.Core.Gameplay.Systems.ViewSpawner;
 using Cysharp.Threading.Tasks;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 using ScopelyCaseStudy.Core.Gameplay.Systems.LevelControllerSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -58,7 +57,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem
         public async UniTask<Enemy> SpawnEnemyInIndexedSpawnPoint(EnemyConfig enemyConfig, int index)
         {
             var enemyView = _viewSpawnerSystem.Spawn<EnemyView>(enemyConfig.PoolKey);
-            var enemy = await EnemyFactory.CreateEnemy(enemyView, enemyConfig, CancellationTokenSource.Token);
+            var enemy = await EnemyFactory.CreateEnemy(Session, enemyView, enemyConfig, CancellationTokenSource.Token);
 
             enemyView.transform.SetParent(_parentTransform);
 

@@ -16,7 +16,9 @@ using CFGameClient.Core.Gameplay;
 using CFGameClient.Core.Gameplay.Systems;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 using ScopelyCaseStudy.Core.Gameplay.GameData;
+using ScopelyCaseStudy.Core.Gameplay.Systems.LevelControllerSystem;
 using ScopelyCaseStudy.Core.Gameplay.UI.Popups.Fail;
 using ScopelyCaseStudy.Core.Gameplay.UI.Popups.Win;
 using ScopelyCaseStudy.Core.Scenes;
@@ -36,6 +38,8 @@ namespace ScopelyCaseStudy.Core.Gameplay
         public GameSessionSaveStorage GameSessionSaveStorage { get; private set; }
         public GameSettings GameSettings { get; private set; }
         public LevelData LevelData { get; private set; }
+        public Base Base{ get; private set; }
+        public Camera LevelCamera => _levelSceneController.SceneCamera;
 
         private readonly IObjectResolver _resolver;
         private readonly DataManager _dataManager;
@@ -112,6 +116,13 @@ namespace ScopelyCaseStudy.Core.Gameplay
             {
                 await system.Initialize(this, cancellationToken);
             }
+
+            Base = new Base();
+            var baseData = new BaseData(LevelData.BaseConfig);
+            var levelControllerSystem = GetSystem<ILevelControllerSystem>();
+            var baseView = levelControllerSystem.Level.BaseView;
+            await Base.InitializeController(baseData, baseView, cancellationToken);
+            Base.SetSession(this);
         }
 
         public void Activate()

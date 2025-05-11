@@ -76,14 +76,14 @@ namespace CerberusFramework.Core.MVC
                 return;
             }
 
+            Dispose();
+
+            View.Dispose();
+
             Data.IsInitialized = false;
             Data.IsActivated = false;
             Data.IsDeactivated = false;
             Data.IsDisposed = true;
-
-            Dispose();
-
-            View.Dispose();
         }
 
         protected abstract UniTask Initialize(CancellationToken cancellationToken);

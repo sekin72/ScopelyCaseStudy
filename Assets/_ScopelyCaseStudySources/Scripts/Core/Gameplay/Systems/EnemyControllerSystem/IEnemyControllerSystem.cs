@@ -1,5 +1,5 @@
 using CFGameClient.Core.Gameplay.Systems;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 {

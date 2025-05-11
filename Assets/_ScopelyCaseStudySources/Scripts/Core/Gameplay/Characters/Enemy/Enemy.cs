@@ -1,35 +1,22 @@
 using System;
 using System.Threading;
 using CerberusFramework.Core.Managers.Pool;
-using CerberusFramework.Core.MVC;
 using Cysharp.Threading.Tasks;
 
-namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
+namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
-    public abstract class Enemy : Controller<EnemyData, EnemyView>
+    public abstract class Enemy : Character<EnemyData, EnemyView>
     {
         public event Action<Enemy> EnemyDiedEvent;
 
         public PoolKeys PoolKey => Data.EnemyConfig.PoolKey;
 
-        protected override UniTask Initialize(CancellationToken cancellationToken)
+        protected override async UniTask Initialize(CancellationToken cancellationToken)
         {
-            return View.Initialize(cancellationToken);
+            await base.Initialize(cancellationToken);
         }
 
-        protected override void Activate()
-        {
-        }
-
-        protected override void Deactivate()
-        {
-        }
-
-        protected override void Dispose()
-        {
-        }
-
-        public void OnDeath()
+        public override void OnDeath()
         {
             View.gameObject.SetActive(false);
             EnemyDiedEvent?.Invoke(this);

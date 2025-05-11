@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Threading;
 using CerberusFramework.Utilities.Extensions;
 using Cysharp.Threading.Tasks;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 using ScopelyCaseStudy.Core.Gameplay.Systems.EnemySpawnerSystem;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 {
     [CreateAssetMenu(fileName = "EnemyControllerSystem", menuName = "ScopelyCaseStudy/Systems/EnemyControllerSystem", order = 1)]
-    public class EnemyControllerSystem : GameSystem, IEnemyControllerSystem
+    public class EnemyControllerSystem : GameSystem, IEnemyControllerSystem, ILateTickable
     {
         public override Type RegisterType => typeof(IEnemyControllerSystem);
 
@@ -91,9 +92,9 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
             var tasks = new List<UniTask>();
             for (int i = 0; i < spawnList.Count; i++)
             {
-                var enemySettingCountPair = spawnList[i];
+                var enemyConfigCountPair = spawnList[i];
                 Enemy enemy = null;
-                tasks.Add(_enemySpawnerSystem.SpawnEnemyInRandomSpawnPoint(enemySettingCountPair).ContinueWith(retrievedEnemy =>
+                tasks.Add(_enemySpawnerSystem.SpawnEnemyInRandomSpawnPoint(enemyConfigCountPair).ContinueWith(retrievedEnemy =>
                 {
                     enemy = retrievedEnemy;
                     enemy.EnemyDiedEvent += OnEnemyDied;
@@ -132,6 +133,17 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
             }
 
             return null;
+        }
+
+        public void LateTick()
+        {
+            foreach(var enemy in _enemies)
+            {
+                if (enemy.IsAlive())
+                {
+                    enemy.LateTick();
+                }
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using CerberusFramework.Core.MVC;
 using Cysharp.Threading.Tasks;
+using ScopelyCaseStudy.Core.Gameplay.Characters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.LevelAssets
 {
     public class LevelView : View
     {
-        public BaseView Base;
+        public BaseView BaseView;
         public List<SpawnPointView> SpawnPoints;
         public Transform EnemyParent;
 
@@ -35,7 +36,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.LevelAssets
         [Button("Fetch Transforms")]
         public void FetchSpawnPoints()
         {
-            Base = GetComponentInChildren<BaseView>();
+            BaseView = GetComponentInChildren<BaseView>();
 
             SpawnPoints = new List<SpawnPointView>();
             foreach (var spawnPoint in GetComponentsInChildren<SpawnPointView>())

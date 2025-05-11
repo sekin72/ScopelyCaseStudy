@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1d4b3a46ff3be4ca4b0a1bb238d147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Base: {fileID: 1743114344887497340}
+  BaseView: {fileID: 1743114344887497340}
   SpawnPoints:
   - {fileID: 248975251275887353}
   - {fileID: 2850115560821649644}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1d4b3a46ff3be4ca4b0a1bb238d147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Base: {fileID: 0}
+  BaseView: {fileID: 0}
   SpawnPoints: []
   EnemyParent: {fileID: 0}
 --- !u!1001 &4753358447376301029

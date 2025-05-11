@@ -9,15 +9,13 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI.Popups.Pause
         public readonly Action OnSaveButtonClicked;
         public readonly Action OnLoadButtonClicked;
         public readonly Action OnMMButtonClicked;
-        public readonly Action OnAfterClosed;
 
         public PausePopupData(Action onSaveButtonClicked, Action onLoadButtonClicked, Action mmButtonClicked, Action onAfterClosed)
-            : base(PoolKeys.PausePopup)
+            : base(PoolKeys.PausePopup, onCloseClicked: onAfterClosed)
         {
             OnSaveButtonClicked = onSaveButtonClicked;
             OnLoadButtonClicked = onLoadButtonClicked;
             OnMMButtonClicked = mmButtonClicked;
-            OnAfterClosed = onAfterClosed;
         }
     }
 }

@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using CerberusFramework.Core.MVC;
-using ScopelyCaseStudy.Core.Gameplay.Characters.Enemy;
-using UnityEngine;
 
-namespace ScopelyCaseStudy.Core.Gameplay.Characters.Enemy
+namespace ScopelyCaseStudy.Core.Gameplay.Characters
 {
-    public class EnemyData : Data
+    public class EnemyData : CharacterData
     {
         public readonly EnemyConfig EnemyConfig;
 
-        public EnemyData(EnemyConfig enemyConfig)
+        public EnemyData(EnemyConfig enemyConfig) : base(enemyConfig.MoveSpeed)
         {
             EnemyConfig = enemyConfig;
         }
