@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using CerberusFramework.Core.Managers.Data.Storages;
 using CerberusFramework.Core.Managers.Loading;
 using CerberusFramework.Core.Managers.Pool;
 using CerberusFramework.Core.Managers.UI;
@@ -152,6 +153,14 @@ namespace ScopelyCaseStudy.Core.Scenes
 
         public void RestartLevel()
         {
+            var oldStorage = _session.GameSessionSaveStorage;
+            _session.SetGameSessionStorage(new GameSessionSaveStorage
+            {
+                HighScore = oldStorage.HighScore,
+                CurrentLevel = oldStorage.CurrentLevel,
+                LevelRandomSeed = oldStorage.LevelRandomSeed,
+            });
+
             _levelScenePanel.Dispose();
             LoadLevel().Forget();
         }

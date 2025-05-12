@@ -89,6 +89,7 @@ namespace ScopelyCaseStudy.Core.Injection
             builder.RegisterMessageBroker<TurretCostChangedEvent>(options);
             builder.RegisterMessageBroker<TurretPlacedEvent>(options);
             builder.RegisterMessageBroker<TurretSoldEvent>(options);
+            builder.RegisterMessageBroker<WaveStartedEvent>(options);
             return options;
         }
 

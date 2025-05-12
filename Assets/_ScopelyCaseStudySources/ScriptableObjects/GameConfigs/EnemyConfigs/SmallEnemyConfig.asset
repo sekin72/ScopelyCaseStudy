@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SmallEnemyConfig
   m_EditorClassIdentifier: 
   PoolKey: 2000
-  Health: 5
+  Health: 3
   WeaponConfig: {fileID: 11400000, guid: f2145e97b06c24145983345a9a7d738e, type: 2}
   MoveSpeed: 1
   EnemyType: 0

@@ -255,6 +255,7 @@ namespace ScopelyCaseStudy.Core.Gameplay
             Deactivate();
 
             GameSessionSaveStorage.GameplayFinished = true;
+
             SaveGameSessionStorage();
 
             if (!success)
@@ -327,6 +328,12 @@ namespace ScopelyCaseStudy.Core.Gameplay
         public void ResumeGame()
         {
             Time.timeScale = 1;
+        }
+
+        public void SetGameSessionStorage(GameSessionSaveStorage gameSessionSaveStorage)
+        {
+            GameSessionSaveStorage = gameSessionSaveStorage;
+            SaveGameSessionStorage();
         }
 
         public void SaveGameSessionStorage()

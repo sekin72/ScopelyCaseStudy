@@ -18,6 +18,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
         public override Type RegisterType => typeof(IEnemyControllerSystem);
 
         private IEnemySpawnerSystem _enemySpawnerSystem;
+        private IPublisher<WaveStartedEvent> _waveStartedEventPublisher;
 
         private List<Enemy> _enemies;
         private Dictionary<EnemyView, Enemy> _enemyViewToEnemyMap;
@@ -40,6 +41,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
             _maxWave = Session.LevelData.WaveData.Count;
 
             _currentWaveEnemyCount = 0;
+
+            _waveStartedEventPublisher = GlobalMessagePipe.GetPublisher<WaveStartedEvent>();
 
             var bagBuilder = DisposableBag.CreateBuilder();
             GlobalMessagePipe.GetSubscriber<EnemyKilledEvent>().Subscribe(OnEnemyDied).AddTo(bagBuilder);
@@ -80,6 +83,8 @@ namespace ScopelyCaseStudy.Core.Gameplay.Systems.EnemyControllerSystem
 
         private async UniTask LoadEnemies()
         {
+            _waveStartedEventPublisher.Publish(new WaveStartedEvent(_currentWave));
+
             var waveData = Session.LevelData.WaveData[_currentWave];
             var enemyLists = waveData.EnemyLists;
 

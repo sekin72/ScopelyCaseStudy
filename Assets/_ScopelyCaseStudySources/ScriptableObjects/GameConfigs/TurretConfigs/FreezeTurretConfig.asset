@@ -16,5 +16,5 @@ MonoBehaviour:
   Health: 0
   WeaponConfig: {fileID: 11400000, guid: f9ef5d87c5fcba843ac97a535b39812f, type: 2}
   MoveSpeed: 0
-  Cost: 3
-  CostMultiplier: 2
+  Cost: 5
+  CostMultiplier: 1.5

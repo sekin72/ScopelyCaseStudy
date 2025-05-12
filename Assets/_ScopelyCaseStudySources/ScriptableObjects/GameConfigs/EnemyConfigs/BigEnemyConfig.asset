@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BigEnemyConfig
   m_EditorClassIdentifier: 
   PoolKey: 2001
-  Health: 10
+  Health: 5
   WeaponConfig: {fileID: 11400000, guid: 60647ea4323a87245817fe6e4359ac6a, type: 2}
   MoveSpeed: 0.5
   EnemyType: 1
-  RewardedCoin: 3
+  RewardedCoin: 1

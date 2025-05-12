@@ -11,6 +11,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 {
     public abstract class AttackComponent : Component, ILateTickable
     {
+        public event Action Attacked;
         protected ICharacter AttackTarget;
         protected float AttackRange;
         protected bool AttackTargetInRange;
@@ -104,6 +105,9 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters.Components
 
             await Weapon.AttackTarget(AttackTarget, _cancellationTokenSource.Token);
 
+            Attacked?.Invoke();
+
+            _cancellationTokenSource?.Token.ThrowIfCancellationRequested();
             await UniTask.Delay(TimeSpan.FromSeconds(_attackCooldown), cancellationToken: _cancellationTokenSource.Token);
 
             _isAttacking = false;

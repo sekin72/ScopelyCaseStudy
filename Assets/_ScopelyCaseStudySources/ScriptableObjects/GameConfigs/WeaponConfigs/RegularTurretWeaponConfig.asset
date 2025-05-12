@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RegularTurretWeaponConfig
   m_EditorClassIdentifier: 
   Cooldown: 1
-  Damage: 1
+  Damage: 2
   Range: 25
   AdditionalEffects: []
   BulletLifetime: 2

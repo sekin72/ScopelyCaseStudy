@@ -16,7 +16,20 @@ namespace ScopelyCaseStudy.Core.Gameplay.Characters
             _towardsTargetMovementComponent = MovementComponent as TowardsTargetMovementComponent;
             _creepAttackComponent = AttackComponent as CreepAttackComponent;
 
+            _creepAttackComponent.Attacked += OnAttacked;
+
             _towardsTargetMovementComponent.SetTarget(GameSession.Base.View.transform);
+        }
+
+        protected override void Deactivate()
+        {
+            _creepAttackComponent.Attacked -= OnAttacked;
+            base.Deactivate();
+        }
+
+        private void OnAttacked()
+        {
+            //TakeDamage(Data.EnemyConfig.Health);
         }
     }
 }

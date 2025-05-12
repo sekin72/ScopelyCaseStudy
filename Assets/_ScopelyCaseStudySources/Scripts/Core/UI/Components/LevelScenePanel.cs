@@ -14,6 +14,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI
     {
         [SerializeField] private CFText _scoreText;
         [SerializeField] private CFText _goldText;
+        [SerializeField] private CFText _waveText;
 
         [SerializeField] private TurretSeller _regularTurret;
         [SerializeField] private TurretSeller _freezeTurret;
@@ -34,6 +35,7 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI
             var bagBuilder = DisposableBag.CreateBuilder();
             GlobalMessagePipe.GetSubscriber<ScoreChangedEvent>().Subscribe(OnScoreChanged).AddTo(bagBuilder);
             GlobalMessagePipe.GetSubscriber<GoldChangedEvent>().Subscribe(OnGoldChangedEvent).AddTo(bagBuilder);
+            GlobalMessagePipe.GetSubscriber<WaveStartedEvent>().Subscribe(OnWaveStartedEvent).AddTo(bagBuilder);
             _messageSubscription = bagBuilder.Build();
 
             _turretPlacerSystem = gameSession.GetSystem<ITurretPlacerSystem>();
@@ -61,6 +63,11 @@ namespace ScopelyCaseStudy.Core.Gameplay.UI
         private void OnGoldChangedEvent(GoldChangedEvent evt)
         {
             _goldText.Text = evt.Gold.ToString();
+        }
+
+        private void OnWaveStartedEvent(WaveStartedEvent evt)
+        {
+            _waveText.Text = $"{evt.Index + 1}";
         }
     }
 }
